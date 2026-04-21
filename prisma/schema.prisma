@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Grant {
+  id                  String  @id
+  name                String
+  summary             String
+  supports            Json
+  applicantType       Json    @map("applicant_type")
+  employeeCountMin    Int?    @map("employee_count_min")
+  employeeCountMax    Int?    @map("employee_count_max")
+  revenueBand         Json    @map("revenue_band")
+  businessGoals       Json    @map("business_goals")
+  requiresLocalEntity Boolean @map("requires_local_entity")
+  requiresNewMarket   Boolean @map("requires_new_market")
+  notes               Json
+
+  @@map("grants")
+}
