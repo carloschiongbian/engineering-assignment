@@ -12,12 +12,14 @@ React, TypeScript, Next.js, Tailwind, AntDesign, Axios, PrismaORM, and SQLite
 6. Click on the "Grant Card" to see more details.
 
 # My Approach
-I inspected the data given in the grants.json file, afterwards, I built out the UI so that I could simulate the data filtering without the backend. Once I was satisfied with how the filter was simulated, I slowly integrated the backend service with PrismaORM and SQLite. To populate the local database, I seeded the data through the script in seed.ts so that I would be able to make successful requests via Axios.
+I started by inspecting the dataset to understand the shape of the data and identify which fields were most relevant for filtering. From there, I built the UI first and simulated the filtering logic on the frontend to quickly validate the user experience without introducing backend complexity early on.
+
+Once I've established the flow correctly, I integrated a simple backend using Prisma and SQLite, and seeded the data locally. This allowed me to transition cleanly from a "front-end only" mocked setup to a working API setup with a functioning backend service.
 
 # Dev Notes
 1. The env file was intentionally included in the repository. Not best practice, but for this task there's no danger.
 2. I made use of Cursor to help build out the UI while I focused more on how the data was manipulated, queried, and consumed on by the frontend and backend.
-3. For the filters, I focused on applicant_type, revenue_band, local_entity, and new_market since these fields are the most effective for narrowing down results early. They represent high-level eligibility criteria that users are likely to know upfront, which makes the filtering experience faster and more intuitive. The rest of the information is still important, but I placed it inside the Grant Card pop-up since those details are better suited for deeper evaluation once the user has a smaller, more relevant set of options.
+3. For the filters, I focused on applicant_type, revenue_band, requires_local_entity, and requires_new_market since these fields are the most effective for narrowing down results early. They represent high-level eligibility criteria that users are likely to know upfront, which makes the filtering faster and more intuitive. The rest of the information is still important, but I placed it inside the Grant Card pop-up since those details are better suited for deeper evaluation once the user has a smaller, more relevant set of options.
 
 ========================================================================================================
 .
