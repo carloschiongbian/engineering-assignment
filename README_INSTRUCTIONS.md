@@ -18,7 +18,7 @@ Once I've established the flow correctly, I integrated a simple backend using Pr
 
 # Dev Notes
 1. The env file was intentionally included in the repository. Not best practice, but for this task there's no danger.
-2. I made use of Cursor to help build out the UI while I focused more on how the data was manipulated, queried, and consumed on by the frontend and backend.
+2. I used Cursor as my AI tool to speed up parts of the UI development, which allowed me to focus more on how the data is filtered, queried, and consumed across the frontend and backend.
 3. For the filters, I focused on applicant_type, revenue_band, requires_local_entity, and requires_new_market since these fields are the most effective for narrowing down results early. They represent high-level eligibility criteria that users are likely to know upfront, which makes the filtering faster and more intuitive. The rest of the information is still important, but I placed it inside the Grant Card pop-up since those details are better suited for deeper evaluation once the user has a smaller, more relevant set of options.
 
 ========================================================================================================
