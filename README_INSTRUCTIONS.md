@@ -17,9 +17,14 @@ I started by inspecting the dataset to understand the shape of the data and iden
 Once I've established the flow correctly, I integrated a simple backend using Prisma and SQLite, and seeded the data locally. This allowed me to transition cleanly from a "front-end only" mocked setup to a working API setup with a functioning backend service.
 
 # Dev Notes
-1. The env file was intentionally included in the repository. Not best practice, but for this task there's no danger.
+1. The env file was intentionally included in the repository. While not best practice, I made that tradeoff here to reduce setup friction and ensure the project runs immediately for reviewers.
+
 2. I used Cursor as my AI tool to speed up parts of the UI development, which allowed me to focus more on how the data is filtered, queried, and consumed across the frontend and backend.
-3. For the filters, I focused on applicant_type, revenue_band, requires_local_entity, and requires_new_market since these fields are the most effective for narrowing down results early. They represent high-level eligibility criteria that users are likely to know upfront, which makes the filtering faster and more intuitive. The rest of the information is still important, but I placed it inside the Grant Card pop-up since those details are better suited for deeper evaluation once the user has a smaller, more relevant set of options.
+
+3. For the filters, I focused on applicant_type, revenue_band, requires_local_entity, and requires_new_market.
+I made the assumption that these act as primary eligibility gates—criteria users are most likely to know upfront. This makes them effective for quickly narrowing down results.
+
+I chose not to include fields like business_goals or supports as filters to avoid overloading the UI with options that may introduce noise or ambiguity early in the decision process. Instead, I surfaced those details in the Grant Card pop-up, where users can evaluate them more meaningfully after the initial filtering.
 
 ========================================================================================================
 .
