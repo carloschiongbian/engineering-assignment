@@ -1,8 +1,8 @@
 'use client'
 
-import { use, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Button, Checkbox, Form, Input, Row } from 'antd'
+import { Button, Checkbox, Form, Input } from 'antd'
 import { GrantCard } from '@/components/grant-card'
 import {
   APPLICANT_TYPES,
@@ -76,11 +76,13 @@ export default function Home() {
   }
 
   return (
-    <main className="mx-auto w-full px-6 py-12 flex flex-col items-center justify-center">
-      <h1 className="mb-6 text-white text-2xl font-semibold">Grant Search</h1>
+    <main className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+      <h1 className="mb-6 text-center text-2xl font-semibold text-white sm:text-left">
+        Grant Search
+      </h1>
 
-      <div className="flex flex-row gap-6 w-[80%] justify-between">
-        <div className="w-1/3 flex flex-col gap-4">
+      <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-8">
+        <aside className="flex w-full flex-col gap-4 lg:w-80 lg:shrink-0">
           <Form
             layout="vertical"
             initialValues={{
@@ -96,31 +98,31 @@ export default function Home() {
               <Input allowClear placeholder="Search grants by name..." />
             </Form.Item>
 
-            <Row wrap={false} className='gap-x-[50px]'>
+            <div className="flex flex-col gap-4 sm:flex-row sm:gap-10 lg:flex-col lg:gap-0">
               <div>
-                <h2 className='text-white text-sm font-bold'>Applicant type</h2>
-                <Form.Item name="types" className='!text-white'>
-                  <Checkbox.Group options={APPLICANT_TYPE_OPTIONS} className='!text-white' />
+                <h2 className="text-sm font-bold text-white">Applicant type</h2>
+                <Form.Item name="types" className="!text-white">
+                  <Checkbox.Group options={APPLICANT_TYPE_OPTIONS} className="!text-white" />
                 </Form.Item>
               </div>
 
               <div>
-                <h2 className='text-white text-sm font-bold'>Revenue band</h2>
-                <Form.Item name="revenueBands" className='!text-white'>
-                  <Checkbox.Group options={REVENUE_BAND_OPTIONS} className='!text-white' />
+                <h2 className="text-sm font-bold text-white">Revenue band</h2>
+                <Form.Item name="revenueBands" className="!text-white">
+                  <Checkbox.Group options={REVENUE_BAND_OPTIONS} className="!text-white" />
                 </Form.Item>
               </div>
-            </Row>
+            </div>
 
             <div>
-              <h2 className='text-white text-sm font-bold'>Requirements</h2>
-              <Form.Item name="requirements" className='!text-white'>
-                <Checkbox.Group options={REQUIREMENT_OPTIONS} className='!text-white' />
+              <h2 className="text-sm font-bold text-white">Requirements</h2>
+              <Form.Item name="requirements" className="!text-white">
+                <Checkbox.Group options={REQUIREMENT_OPTIONS} className="!text-white" />
               </Form.Item>
             </div>
 
             <Form.Item>
-              <Button type="primary" htmlType="submit" loading={loading}>
+              <Button type="primary" htmlType="submit" loading={loading} block>
                 Search
               </Button>
             </Form.Item>
@@ -133,19 +135,19 @@ export default function Home() {
               {results.length} {results.length === 1 ? 'match' : 'matches'}
             </p>
           )}
-        </div>
+        </aside>
 
-        <div className="w-1/2">
+        <section className="w-full lg:flex-1">
           {results === null ? (
-            <p className="mt-4 py-3 text-sm text-zinc-500">
+            <p className="py-3 text-sm text-zinc-500">
               Press Search to see matching grants.
             </p>
           ) : results.length === 0 ? (
-            <p className="mt-4 py-3 text-sm text-zinc-500">
+            <p className="py-3 text-sm text-zinc-500">
               No grants match your filters.
             </p>
           ) : (
-            <ul className="mt-4 flex flex-col gap-3">
+            <ul className="flex flex-col gap-3">
               {results.map((grant) => (
                 <li key={grant.id}>
                   <GrantCard grant={grant} />
@@ -153,7 +155,7 @@ export default function Home() {
               ))}
             </ul>
           )}
-        </div>
+        </section>
       </div>
     </main>
   )

@@ -39,9 +39,10 @@ export function GrantCard({ grant }: GrantCardProps) {
         onCancel={() => setOpen(false)}
         title={grant.name}
         footer={null}
-        width={600}
+        width="min(600px, calc(100vw - 32px))"
         destroyOnHidden
-
+        centered
+        style={{ border: '2px solid #333', borderRadius: '10px' }}
         styles={{ title: { color: 'white' }, body: { backgroundColor: '#141414' } }}
       >
         <GrantDetails grant={grant} />
@@ -56,21 +57,6 @@ const GrantDetails = ({ grant }: { grant: Grant }) => {
       <p className="text-sm text-zinc-600 dark:text-zinc-400">
         {grant.summary}
       </p>
-
-      {grant.supports.length > 0 && (
-        <Section title="Supports">
-          <ul className="flex flex-wrap gap-1" aria-label="Supports">
-            {grant.supports.map((item) => (
-              <li
-                key={item}
-                className="rounded-md bg-zinc-100 px-2 py-0.5 text-xs text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
-              >
-                {capitalize(item)}
-              </li>
-            ))}
-          </ul>
-        </Section>
-      )}
 
       <Row className='!items-center'>
         <Section title="Applicant types">
@@ -122,7 +108,7 @@ const GrantDetails = ({ grant }: { grant: Grant }) => {
         </Section>
       </Row>
 
-      <Row wrap={false} className='!items-center gap-x-[30px]'>
+      <Row className='!items-center gap-x-[30px] gap-y-4'>
 
         {grant.employee_count_min !== null && (
           <Section title="Minimum Employees">
@@ -148,6 +134,20 @@ const GrantDetails = ({ grant }: { grant: Grant }) => {
         )}
       </Row>
 
+      {grant.supports.length > 0 && (
+        <Section title="Supports">
+          <ul className="flex flex-wrap gap-1" aria-label="Supports">
+            {grant.supports.map((item) => (
+              <li
+                key={item}
+                className="rounded-md bg-zinc-100 px-2 py-0.5 text-xs text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
+              >
+                {capitalize(item)}
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
       {grant.notes.length > 0 && (
         <Section title="Notes">
           <ul className="list-disc space-y-1 pl-5 text-xs text-zinc-600 dark:text-zinc-400">
@@ -177,24 +177,5 @@ function Section({ title, children }: SectionProps) {
   )
 }
 
-type RequirementRowProps = {
-  label: string
-  value: boolean
-}
 
-function RequirementRow({ label, value }: RequirementRowProps) {
-  return (
-    <div className="flex items-baseline gap-2">
-      <dt className="text-zinc-600 dark:text-zinc-400">{label}</dt>
-      <dd
-        className={
-          value
-            ? 'font-medium text-zinc-800 dark:text-zinc-200'
-            : 'text-zinc-500 dark:text-zinc-500'
-        }
-      >
-        {value ? 'Yes' : 'No'}
-      </dd>
-    </div>
-  )
-}
+
